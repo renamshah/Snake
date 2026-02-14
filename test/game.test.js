@@ -55,6 +55,9 @@ class TestRunner {
 // Initialize test runner
 const runner = new TestRunner();
 
+// Import SnakeGame class
+const SnakeGame = require('../js/game.js');
+
 // ============================================================================
 // TESTS
 // ============================================================================
