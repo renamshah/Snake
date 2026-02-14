@@ -1,0 +1,482 @@
+/* Snake Game Styling - Fullscreen Edition */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #0a0e27;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Fullscreen Canvas Container */
+.fullscreen-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1a1f3a 0%, #2d1b4e 100%);
+}
+
+#gameCanvas {
+    max-width: 100vw;
+    max-height: 100vh;
+    display: block;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+/* HUD Elements - Floating on top */
+.hud-top-left,
+.hud-top-right,
+.hud-bottom-left,
+.hud-bottom-right {
+    position: fixed;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 8px;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+h1 {
+    color: #00ff00;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+/* Top-Left: Score and Title */
+.hud-top-left {
+    top: 20px;
+    left: 20px;
+}
+
+/* Top-Right: Speed Info */
+.hud-top-right {
+    top: 20px;
+    right: 20px;
+}
+
+/* Bottom-Left: Control Buttons */
+.hud-bottom-left {
+    bottom: 20px;
+    left: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    min-width: 320px;
+}
+
+/* Bottom-Right: Speed Slider */
+.hud-bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Info Displays */
+.score-display,
+.difficulty-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.score-display .label,
+.difficulty-display .label {
+    font-weight: bold;
+    color: #999;
+    font-size: 14px;
+}
+
+.score-display .value,
+.difficulty-display .value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00ff00;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 16px;
+    border: 2px solid #00ff00;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(0, 255, 0, 0.1);
+    color: #00ff00;
+}
+
+.btn-large {
+    padding: 14px 18px;
+    font-size: 12px;
+}
+
+.btn-primary {
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+.btn-primary:hover {
+    background: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.4);
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+.btn-secondary {
+    border-color: #ffaa00;
+    color: #ffaa00;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 170, 0, 0.2);
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.4);
+}
+
+.btn-secondary:active {
+    transform: scale(0.95);
+}
+
+/* Speed Controls (Vertical) */
+.speed-controls-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.speed-label {
+    color: #999;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#speedSlider {
+    width: 40px;
+    height: 150px;
+    writing-mode: bt-lr;
+    -webkit-appearance: slider-vertical;
+    appearance: slider-vertical;
+    background: transparent;
+    cursor: pointer;
+}
+
+#speedSlider::-webkit-slider-runnable-track {
+    background: rgba(0, 255, 0, 0.2);
+    border-radius: 5px;
+    width: 6px;
+    height: 150px;
+}
+
+#speedSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ff00 0%, #00aa00 100%);
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    border: 2px solid #00ff00;
+}
+
+#speedSlider::-moz-range-track {
+    background: rgba(0, 255, 0, 0.2);
+    border-radius: 5px;
+}
+
+#speedSlider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00ff00 0%, #00aa00 100%);
+    cursor: pointer;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+#speedValue {
+    font-weight: bold;
+    color: #00ff00;
+    min-width: 80px;
+    text-align: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Mobile D-Pad */
+.mobile-controls {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+}
+
+.dpad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.dpad-mid {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.dpad-btn {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ffaa00;
+    border-radius: 6px;
+    background: rgba(255, 170, 0, 0.1);
+    color: #ffaa00;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    user-select: none;
+    text-shadow: 0 0 5px rgba(255, 170, 0, 0.5);
+}
+
+.dpad-btn:active {
+    transform: scale(0.9);
+    box-shadow: 0 0 15px rgba(255, 170, 0, 0.4);
+    background: rgba(255, 170, 0, 0.2);
+}
+
+.dpad-btn:disabled {
+    background: rgba(100, 100, 100, 0.1);
+    border-color: transparent;
+    cursor: default;
+}
+
+.dpad-btn.center {
+    width: 30px;
+    height: 30px;
+    cursor: default;
+}
+
+/* Help Overlay */
+.help-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.help-content {
+    background: rgba(10, 14, 39, 0.95);
+    border: 2px solid #00ff00;
+    border-radius: 12px;
+    padding: 40px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+}
+
+.help-content h2 {
+    color: #00ff00;
+    font-size: 32px;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.help-section h3 {
+    color: #ffaa00;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px rgba(255, 170, 0, 0.3);
+}
+
+.help-section ul {
+    list-style: none;
+    color: #ccc;
+    line-height: 1.8;
+}
+
+.help-section li {
+    margin-bottom: 10px;
+}
+
+.help-section strong {
+    color: #00ff00;
+}
+
+.help-close {
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .hud-bottom-left {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-large {
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    h1 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .score-display .value,
+    .difficulty-display .value {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #gameCanvas {
+        border-width: 1px;
+    }
+
+    .hud-top-left,
+    .hud-top-right,
+    .hud-bottom-left,
+    .hud-bottom-right {
+        padding: 12px;
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .score-display .value,
+    .difficulty-display .value {
+        font-size: 18px;
+    }
+
+    .btn-large {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
+
+    .dpad-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    #speedSlider {
+        height: 120px;
+    }
+
+    #speedSlider::-webkit-slider-runnable-track {
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hud-bottom-left {
+        min-width: 100%;
+        left: 10px;
+        right: 10px;
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .hud-top-left,
+    .hud-top-right {
+        padding: 10px;
+    }
+
+    .hud-bottom-right {
+        display: none;
+    }
+
+    h1 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .score-display,
+    .difficulty-display {
+        gap: 8px;
+    }
+
+    .score-display .value,
+    .difficulty-display .value {
+        font-size: 16px;
+    }
+
+    .btn-large {
+        padding: 10px;
+        font-size: 9px;
+    }
+
+    .dpad-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 12px;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    .help-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .help-content {
+        padding: 20px;
+        margin: 20px;
+    }
+}

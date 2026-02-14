@@ -1,0 +1,38 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "Classic Snake game built with vanilla JavaScript, HTML5 Canvas, and CSS3",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000",
+    "test": "node test/game.test.js",
+    "serve": "http-server",
+    "dev": "http-server -c-1"
+  },
+  "keywords": [
+    "snake",
+    "game",
+    "javascript",
+    "html5",
+    "canvas",
+    "vanilla-js",
+    "responsive",
+    "mobile-friendly"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/snake-game.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/snake-game/issues"
+  },
+  "homepage": "https://github.com/yourusername/snake-game#readme",
+  "optionalDependencies": {
+    "http-server": "^latest"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}

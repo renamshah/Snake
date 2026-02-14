@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Main Game Canvas (Fullscreen) -->
+    <div class="fullscreen-container">
+        <canvas id="gameCanvas" width="1200" height="800"></canvas>
+    </div>
+
+    <!-- Top-Left: Title and Score -->
+    <div class="hud-top-left">
+        <h1>🐍 SNAKE</h1>
+        <div class="score-display">
+            <span class="label">Score:</span>
+            <span class="value" id="score">0</span>
+        </div>
+    </div>
+
+    <!-- Top-Right: Speed and Info -->
+    <div class="hud-top-right">
+        <div class="difficulty-display">
+            <span class="label">Speed:</span>
+            <span class="value" id="difficulty">Normal</span>
+        </div>
+    </div>
+
+    <!-- Bottom-Left: Control Buttons -->
+    <div class="hud-bottom-left">
+        <button id="pauseBtn" class="btn btn-primary btn-large">PAUSE (P)</button>
+        <button id="restartBtn" class="btn btn-primary btn-large">RESTART (R)</button>
+        <button id="fullscreenBtn" class="btn btn-secondary btn-large">⛶ FULLSCREEN</button>
+    </div>
+
+    <!-- Bottom-Right: Speed Controls -->
+    <div class="hud-bottom-right">
+        <div class="speed-controls-vertical">
+            <div class="speed-label">Speed</div>
+            <input type="range" id="speedSlider" min="1" max="20" value="10" orient="vertical">
+            <span id="speedValue">Normal</span>
+        </div>
+    </div>
+
+    <!-- Mobile D-Pad (Bottom Center) -->
+    <div class="mobile-controls" id="mobileControls">
+        <div class="dpad">
+            <button class="dpad-btn up" id="upBtn" aria-label="Move Up">▲</button>
+            <div class="dpad-mid">
+                <button class="dpad-btn left" id="leftBtn" aria-label="Move Left">◄</button>
+                <button class="dpad-btn center" disabled>●</button>
+                <button class="dpad-btn right" id="rightBtn" aria-label="Move Right">►</button>
+            </div>
+            <button class="dpad-btn down" id="downBtn" aria-label="Move Down">▼</button>
+        </div>
+    </div>
+
+    <!-- Help Overlay (Hidden by default) -->
+    <div class="help-overlay" id="helpOverlay">
+        <div class="help-content">
+            <h2>HOW TO PLAY</h2>
+            <div class="help-grid">
+                <div class="help-section">
+                    <h3>Controls</h3>
+                    <ul>
+                        <li><strong>Arrow Keys</strong> or <strong>WASD</strong> - Move</li>
+                        <li><strong>P</strong> - Pause/Resume</li>
+                        <li><strong>R</strong> or <strong>SPACE</strong> - Restart</li>
+                        <li><strong>H</strong> - Show/Hide Help</li>
+                        <li><strong>F</strong> - Toggle Fullscreen</li>
+                    </ul>
+                </div>
+                <div class="help-section">
+                    <h3>Rules</h3>
+                    <ul>
+                        <li>Eat red food to grow</li>
+                        <li>Avoid hitting yourself</li>
+                        <li>+10 points per food</li>
+                        <li>Grid wraps around edges</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="help-close">Press <strong>H</strong> or click outside to close</p>
+        </div>
+    </div>
+
+    <script src="js/game.js"></script>
+    <script src="js/renderer.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'h') {
+                const overlay = document.getElementById('helpOverlay');
+                overlay.style.display = overlay.style.display === 'none' ? 'flex' : 'none';
+            }
+            if (e.key.toLowerCase() === 'f') {
+                document.getElementById('fullscreenBtn').click();
+            }
+        });
+
+        // Close help on click outside
+        document.getElementById('helpOverlay').addEventListener('click', (e) => {
+            if (e.target.id === 'helpOverlay') {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Fullscreen button
+        document.getElementById('fullscreenBtn').addEventListener('click', () => {
+            const elem = document.documentElement;
+            if (!document.fullscreenElement) {
+                elem.requestFullscreen().catch(err => {
+                    console.log('Fullscreen request failed:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>

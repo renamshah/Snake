@@ -1,0 +1,35 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    
+    - name: Run game tests
+      run: node test/game.test.js
+    
+    - name: Check code for obvious issues
+      run: |
+        echo "Running basic validation..."
+        # Check if main files exist
+        test -f index.html && echo "✓ index.html found"
+        test -f js/game.js && echo "✓ js/game.js found"
+        test -f js/renderer.js && echo "✓ js/renderer.js found"
+        test -f js/input.js && echo "✓ js/input.js found"
+        test -f js/app.js && echo "✓ js/app.js found"
+        test -f css/styles.css && echo "✓ css/styles.css found"
+        test -f test/game.test.js && echo "✓ test/game.test.js found"
+        echo "All files validated!"
