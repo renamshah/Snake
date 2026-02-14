@@ -8,7 +8,7 @@
     "test": "node test/game.test.js",
     "serve": "http-server",
     "dev": "http-server -c-1",
-    "build": "echo 'Static content - no build required'"
+    "build": "echo Building..."
   },
   "keywords": [
     "snake",
