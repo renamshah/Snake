@@ -15,9 +15,18 @@
     <!-- Top-Left: Title and Score -->
     <div class="hud-top-left">
         <h1>🐍 SNAKE</h1>
+        <div class="player-display">
+            <span class="label">Player:</span>
+            <span class="value" id="playerName">Guest</span>
+            <button id="playerSelectBtn" class="btn-icon" title="Switch Player">👤</button>
+        </div>
         <div class="score-display">
             <span class="label">Score:</span>
             <span class="value" id="score">0</span>
+        </div>
+        <div class="best-score-display">
+            <span class="label">Best:</span>
+            <span class="value" id="bestScore">0</span>
         </div>
     </div>
 
